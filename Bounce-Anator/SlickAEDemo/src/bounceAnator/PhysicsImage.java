@@ -35,28 +35,41 @@ public class PhysicsImage {
 		offY=y;
 	}
 	
+	/**draws this image based on the location of the physical body
+	 * and the offset between the body's origin and the image's origin
+	 * (see offX and offY)*/
 	public void render(){
 		face.setRotation((float) Math.toDegrees(body.getAngle()));
 		face.draw(body.getPosition().x*PIXELS_PER_METER+offX,
 				body.getPosition().y*PIXELS_PER_METER+offY);
 	}
 	
+	/**sets the image that follows the physical body*/
 	public void setFace(Image face) {
 		this.face = face;
 	}
 
+	/**gets the image that follows the physical body*/
 	public Image getFace() {
 		return face;
 	}
 
+	/**sets the body subject to physical simulation
+	 * that this image will follow*/
 	public void setBody(Body body) {
 		this.body = body;
 	}
 
+	/**gets the body subject to physical simulation
+	 * that this image will follow*/
 	public Body getBody() {
 		return body;
 	}
 	
+	/**sets the location of this image in pixel coordinates.
+	 * Note that this will change the location of the body
+	 * of this image, but will not change the angle, velocity, or
+	 * any other physical attributes*/
 	public void setLocation(float pixelsX, float pixelsY){
 		body.setTransform(new Vector2(pixelsX/PIXELS_PER_METER, pixelsY/PIXELS_PER_METER),
 				body.getAngle());

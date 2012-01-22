@@ -21,16 +21,23 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
+/**the state in which the game BounceAnator is played
+ * 
+ * In this game, balls drop from the ceiling regularly, and you must keep
+ * them bouncing in the air, off of the ground, for as long as possible.
+ * as you play more balls appear every fifteen seconds, making it more difficult.*/
 public class PlayState extends BasicGameState{
 
 	/**stores all of the physicsImages in the level*/
 	ArrayList<PhysicsImage> physicsImages=new ArrayList<PhysicsImage>();
 	
+	/**the conversion scale between pixels and LIBGdx Box2D meters*/
 	public static final int PIXELS_PER_METER=8;
 	
 	/**handles the physics*/
 	World physicsWorld;
 	
+	/**the density of the balls in this simulation*/
 	public static final float BALL_DENSITY=1f;
 	
 	/**there will be a one second pause before the
@@ -57,15 +64,22 @@ public class PlayState extends BasicGameState{
 	 * if nextState==getID(), do not change states*/
 	int nextState;
 	
+	/**a decorative background for the game*/
 	Image brickBackground;
 	
+	/**the sound of two bodies hitting each other
+	 * (in this case ball>ball, ball>wall, and ball>paddle)*/
 	Sound clack;
 	
+	/**provides a unique integer with which to identify this state
+	 * This identifier is taken from the BounceAnator class
+	 * In this case, BounceAnator.PlayState*/
 	@Override
 	public int getID() {
 		return BounceAnator.PlayState;
 	}
 
+	/**Initializes the images and sounds used in this state*/
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
@@ -74,6 +88,10 @@ public class PlayState extends BasicGameState{
 		clack=new Sound("resources/clackAnator.wav");
 	}
 
+	/**sets up the game again each time this state is entered
+	 * Because this game has no paused state, or other need to
+	 * change states without resetting the game, the game will be
+	 * reset immediately upon calling the enter method.*/
 	@Override
 	public void enter(GameContainer container, StateBasedGame game)
 			throws SlickException {
@@ -132,6 +150,8 @@ public class PlayState extends BasicGameState{
 		timePassed=0;
 	}
 	
+	/**draws all of the images in the gameplay
+	 * in this case: the background, the paddle and balls, and the current time*/
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
@@ -197,6 +217,10 @@ public class PlayState extends BasicGameState{
 		physicsImages.add(ball);
 	}
 	
+	/**updates the game
+	 * This involves updating physics, keeping track of the time passed,
+	 * adding balls regularly, checking for death, and switching to a different
+	 * state based on nextState*/
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
@@ -233,6 +257,10 @@ public class PlayState extends BasicGameState{
 		}
 	}
 	
+	
+	/**called each time the mouse is pressed, or in the case of android,
+	 * the screen is touched.  This method will move the block to the location
+	 * of the touch, or end the game if the game is lost*/
 	@Override
 	public void mousePressed(int button, int x, int y) {
 		super.mousePressed(button, x, y);
