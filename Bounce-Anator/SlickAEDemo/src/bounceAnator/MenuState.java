@@ -5,6 +5,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -88,9 +89,9 @@ public class MenuState extends BasicGameState{
 		
 		//show the high score
 		g.setColor(new Color(0,0,0,0.5f));
-		g.fillRect((container.getWidth()-g.getFont().getWidth("High Score: "+BounceAnator.getHighScore()/1000f))/2, 
+		g.fill(new Rectangle((container.getWidth()-g.getFont().getWidth("High Score: "+BounceAnator.getHighScore()/1000f))/2, 
 				128, g.getFont().getWidth("High Score: "+BounceAnator.getHighScore()/1000f), 
-				g.getFont().getHeight("High Score: "+BounceAnator.getHighScore()/1000f));
+				g.getFont().getHeight("High Score: "+BounceAnator.getHighScore()/1000f)));
 		g.setColor(Color.white);
 		g.drawString("High Score: "+BounceAnator.getHighScore()/1000f, 
 				(container.getWidth()-g.getFont().getWidth("High Score: "+BounceAnator.getHighScore()/1000f))/2,

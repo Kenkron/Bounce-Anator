@@ -8,6 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -170,7 +171,7 @@ public class PlayState extends BasicGameState{
 		
 		//show the current time
 		g.setColor(new Color(0,0,0,0.5f));
-		g.fillRect(0, 0, container.getWidth(), 32);
+		g.fill(new Rectangle(0, 0, container.getWidth(), 32));
 		g.setColor(Color.white);
 		g.drawString("Time: "+timePassed/1000f, 
 				(container.getWidth())/2-48,
